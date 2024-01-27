@@ -1,0 +1,24 @@
+name: CI com Java e Quarkus
+on: push
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Instalar dependencias
+        run: mvn -B package --file pom.xml
+      - name: Rodando testes
+        run: mvn test
+
