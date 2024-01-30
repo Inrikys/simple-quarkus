@@ -1,4 +1,4 @@
-package org.acme.controller;
+package org.fruits.controller;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
